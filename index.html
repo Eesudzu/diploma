@@ -19,7 +19,7 @@ html,body{width:100%;min-height:100dvh;background:var(--bg);font-family:'Jost',s
 @keyframes petalFall{0%{opacity:0;transform:translateY(0) rotate(0deg) scale(1)}8%{opacity:.85}90%{opacity:.4}100%{opacity:0;transform:translateY(112vh) rotate(400deg) scale(.6)}}
 
 /* scene */
-.scene{position:relative;z-index:2;min-height:100dvh;display:flex;flex-direction:column;align-items:stretch;;justify-content:center;padding:calc(48px + env(safe-area-inset-top)) 24px calc(60px + env(safe-area-inset-bottom));gap:26px}
+.scene{position:relative;z-index:2;min-height:100dvh;display:flex;flex-direction:column;align-items:stretch;justify-content:center;padding:calc(48px + env(safe-area-inset-top)) 24px calc(60px + env(safe-area-inset-bottom));gap:26px}
 .eyebrow{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);opacity:.55;font-weight:500}
 
 /* envelope */
@@ -55,14 +55,39 @@ html,body{width:100%;min-height:100dvh;background:var(--bg);font-family:'Jost',s
 .music-btn.playing{animation:pulse 2s ease-in-out infinite}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,.4)}50%{box-shadow:0 0 0 12px rgba(201,168,76,0)}}
 
-/* full card */
-.full{position:fixed;inset:0;z-index:50;background:linear-gradient(168deg,#080b14 0%,#0d1226 50%,#150820 100%);display:flex;flex-direction:column;align-items:center;padding:calc(28px + env(safe-area-inset-top)) 20px calc(28px + env(safe-area-inset-bottom)); overflow-y: auto;
--webkit-overflow-scrolling: touch; overflow-y:auto;gap:0;opacity:0;pointer-events:none;transition:opacity .5s .85s}
+/* full card — ИСПРАВЛЕНО */
+.full{
+  position:fixed;
+  inset:0;
+  z-index:50;
+  background:linear-gradient(168deg,#080b14 0%,#0d1226 50%,#150820 100%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:calc(28px + env(safe-area-inset-top)) 20px calc(48px + env(safe-area-inset-bottom));
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+  gap:12px;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .5s .85s
+}
 .full.on{opacity:1;pointer-events:all}
-.cap-art{font-size:52px;margin-bottom:6px;animation:floatCap 3.5s ease-in-out infinite}
+.cap-art{font-size:52px;flex-shrink:0;animation:floatCap 3.5s ease-in-out infinite}
 @keyframes floatCap{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-9px) rotate(2deg)}}
-.from-tag{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);opacity:.55;margin-bottom:20px}
-.paper{background:var(--cream);border-radius:16px;width:100%;max-width:370px;padding:34px 26px 28px;position:relative;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.75),0 0 0 1px rgba(201,168,76,.2); margin-bottom: 40px;}
+.from-tag{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);opacity:.55;flex-shrink:0}
+.paper{
+  background:var(--cream);
+  border-radius:16px;
+  width:100%;
+  max-width:370px;
+  padding:34px 26px 28px;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 40px 100px rgba(0,0,0,.75),0 0 0 1px rgba(201,168,76,.2);
+  flex-shrink:0; /* ← КЛЮЧЕВОЕ ИСПРАВЛЕНИЕ */
+}
 .paper::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#0f1a3a,var(--gold-light),var(--rose))}
 .cdeco{position:absolute;font-size:13px;opacity:.2}
 .cdeco.tl{top:10px;left:12px}.cdeco.tr{top:10px;right:12px;transform:scaleX(-1)}.cdeco.bl{bottom:10px;left:12px;transform:scaleY(-1)}.cdeco.br{bottom:10px;right:12px;transform:scale(-1,-1)}
@@ -86,7 +111,21 @@ html,body{width:100%;min-height:100dvh;background:var(--bg);font-family:'Jost',s
 .det-val{font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:700;color:var(--ink);margin-top:3px;line-height:1.25}
 .paper-foot{border-top:1px solid #f0d098;padding-top:16px;text-align:center}
 .paper-foot-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:var(--rose-light);line-height:1.7}
-.close-btn{margin-top:22px;background:none;border:1px solid rgba(201,168,76,.3);color:rgba(201,168,76,.55);font-family:'Jost',sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;padding:13px 28px;border-radius:40px;cursor:pointer;transition:border-color .2s,color .2s}
+.close-btn{
+  flex-shrink:0;
+  background:none;
+  border:1px solid rgba(201,168,76,.3);
+  color:rgba(201,168,76,.55);
+  font-family:'Jost',sans-serif;
+  font-size:10px;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  padding:13px 28px;
+  border-radius:40px;
+  cursor:pointer;
+  transition:border-color .2s,color .2s;
+  margin-bottom:8px;
+}
 .close-btn:active{border-color:var(--gold);color:var(--gold)}
 #confetti{position:fixed;inset:0;pointer-events:none;z-index:200;overflow:hidden}
 .cp{position:absolute;top:-14px;opacity:0;animation:cff var(--d) ease-in var(--dl) 1 forwards}
@@ -188,24 +227,20 @@ html,body{width:100%;min-height:100dvh;background:var(--bg);font-family:'Jost',s
 });
 
 /* ══════════════════════════════════════════
-   MUSIC — iOS Safari safe pattern:
-   AudioContext создаётся СИНХРОННО внутри
-   обработчика пользовательского жеста (tap).
-   Это единственный способ обойти autoplay policy.
+   MUSIC — iOS Safari safe pattern
    ══════════════════════════════════════════ */
-let AC = null;       // AudioContext — создаём только внутри tap
+let AC = null;
 let masterGain = null;
 let musicPlaying = false;
 let loopTimer = null;
 let activeOscs = [];
 
-/* Ноты романтической мелодии (фа-мажор, вальсообразно) */
 const MELODY = [
-  [349.23,0,.55,.7],[440,  .55,.5,.6],[523.25,1.05,.7,.65],
+  [349.23,0,.55,.7],[440,.55,.5,.6],[523.25,1.05,.7,.65],
   [493.88,1.75,.45,.55],[440,2.2,.5,.6],[349.23,2.7,.5,.55],
-  [392,   3.2,.5,.6],[493.88,3.7,.5,.6],[587.33,4.2,.75,.7],
+  [392,3.2,.5,.6],[493.88,3.7,.5,.6],[587.33,4.2,.75,.7],
   [523.25,4.95,.45,.55],[493.88,5.4,.5,.6],[440,5.9,.5,.55],
-  [392,   6.4,.5,.58],[349.23,6.9,.5,.55],[293.66,7.4,1.1,.6]
+  [392,6.4,.5,.58],[349.23,6.9,.5,.55],[293.66,7.4,1.1,.6]
 ];
 const BASS = [
   [174.61,0,1.9,.32],[185,1.95,1.9,.3],[174.61,3.9,1.9,.32],[146.83,5.85,1.9,.28],[130.81,7.8,1.4,.3]
@@ -219,82 +254,73 @@ const CHORDS = [
 ];
 const DURATION = 9.4;
 
-function playNote(freq, start, dur, vel, type){
-  const now = AC.currentTime + start + 0.05;
-  const osc = AC.createOscillator();
-  const g   = AC.createGain();
-  osc.type = type || 'triangle';
-  osc.frequency.value = freq;
-  g.gain.setValueAtTime(0, now);
-  g.gain.linearRampToValueAtTime(vel, now + 0.03);
-  g.gain.exponentialRampToValueAtTime(vel * 0.5, now + 0.14);
-  g.gain.setValueAtTime(vel * 0.38, now + dur * 0.65);
-  g.gain.linearRampToValueAtTime(0.00001, now + dur);
-  osc.connect(g);
-  g.connect(masterGain);
-  osc.start(now);
-  osc.stop(now + dur + 0.08);
+function playNote(freq,start,dur,vel,type){
+  const now=AC.currentTime+start+0.05;
+  const osc=AC.createOscillator();
+  const g=AC.createGain();
+  osc.type=type||'triangle';
+  osc.frequency.value=freq;
+  g.gain.setValueAtTime(0,now);
+  g.gain.linearRampToValueAtTime(vel,now+0.03);
+  g.gain.exponentialRampToValueAtTime(vel*0.5,now+0.14);
+  g.gain.setValueAtTime(vel*0.38,now+dur*0.65);
+  g.gain.linearRampToValueAtTime(0.00001,now+dur);
+  osc.connect(g);g.connect(masterGain);
+  osc.start(now);osc.stop(now+dur+0.08);
   activeOscs.push(osc);
 }
 
 function startLoop(){
-  MELODY.forEach(([f,t,d,v])=>{ playNote(f,t,d,v,'triangle'); playNote(f,t,d,v*.08,'sine'); });
-  BASS.forEach(([f,t,d,v])  => playNote(f,t,d,v,'sine'));
-  CHORDS.forEach(([f,t,d,v])=> playNote(f,t,d,v,'triangle'));
-  loopTimer = setTimeout(()=>{ if(musicPlaying) startLoop(); }, DURATION * 1000);
+  MELODY.forEach(([f,t,d,v])=>{playNote(f,t,d,v,'triangle');playNote(f,t,d,v*.08,'sine');});
+  BASS.forEach(([f,t,d,v])=>playNote(f,t,d,v,'sine'));
+  CHORDS.forEach(([f,t,d,v])=>playNote(f,t,d,v,'triangle'));
+  loopTimer=setTimeout(()=>{if(musicPlaying)startLoop();},DURATION*1000);
 }
 
 function killOscs(){
   clearTimeout(loopTimer);
-  activeOscs.forEach(o=>{ try{ o.stop(); }catch(e){} });
-  activeOscs = [];
+  activeOscs.forEach(o=>{try{o.stop();}catch(e){}});
+  activeOscs=[];
 }
 
-/* Главная функция — вызывается СИНХРОННО из tap */
 function startMusic(){
-  /* Создаём AudioContext прямо здесь — это гарантирует разрешение iOS */
   if(!AC){
-    AC = new (window.AudioContext || window.webkitAudioContext)();
-    masterGain = AC.createGain();
-    masterGain.gain.value = 0;
+    AC=new(window.AudioContext||window.webkitAudioContext)();
+    masterGain=AC.createGain();
+    masterGain.gain.value=0;
     masterGain.connect(AC.destination);
   }
-  /* resume на случай если браузер приостановил */
-  if(AC.state === 'suspended') AC.resume();
-
+  if(AC.state==='suspended')AC.resume();
   masterGain.gain.cancelScheduledValues(AC.currentTime);
-  masterGain.gain.setValueAtTime(masterGain.gain.value, AC.currentTime);
-  masterGain.gain.linearRampToValueAtTime(0.3, AC.currentTime + 1.4);
-
-  musicPlaying = true;
-  document.getElementById('musicBtn').textContent = '🎶';
+  masterGain.gain.setValueAtTime(masterGain.gain.value,AC.currentTime);
+  masterGain.gain.linearRampToValueAtTime(0.3,AC.currentTime+1.4);
+  musicPlaying=true;
+  document.getElementById('musicBtn').textContent='🎶';
   document.getElementById('musicBtn').classList.add('playing');
   startLoop();
 }
 
 function stopMusic(){
-  if(!AC) return;
+  if(!AC)return;
   killOscs();
   masterGain.gain.cancelScheduledValues(AC.currentTime);
-  masterGain.gain.setValueAtTime(masterGain.gain.value, AC.currentTime);
-  masterGain.gain.linearRampToValueAtTime(0, AC.currentTime + 0.7);
-  musicPlaying = false;
-  document.getElementById('musicBtn').textContent = '🎵';
+  masterGain.gain.setValueAtTime(masterGain.gain.value,AC.currentTime);
+  masterGain.gain.linearRampToValueAtTime(0,AC.currentTime+0.7);
+  musicPlaying=false;
+  document.getElementById('musicBtn').textContent='🎵';
   document.getElementById('musicBtn').classList.remove('playing');
 }
 
 function toggleMusic(){
-  /* toggleMusic тоже вызывается из tap — безопасно */
-  if(musicPlaying) stopMusic(); else startMusic();
+  if(musicPlaying)stopMusic();else startMusic();
 }
 
 /* ── Envelope ── */
-let opened = false;
+let opened=false;
 
 function openEnv(){
-  if(opened) return;
-  opened = true;
-  /* ← TAP HANDLER: создаём AudioContext прямо здесь */
+  if(opened)return;
+  opened=true;
   startMusic();
   document.getElementById('env').classList.add('open');
   document.getElementById('hint').classList.add('gone');
@@ -302,7 +328,7 @@ function openEnv(){
     document.getElementById('scene').style.display='none';
     document.getElementById('fullCard').classList.add('on');
     launchConfetti();
-  }, 1150);
+  },1150);
 }
 
 function closeCard(){
