@@ -1,508 +1,363 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
-    <title>Приглашение на защиту диплома | Фатима | КГТУ</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Защита диплома 🎓</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#0a0d16;--navy:#0f1a3a;--gold:#c9a84c;--gold-light:#f0d688;
+  --rose:#b83060;--rose-light:#e8709a;--cream:#fdfaf4;--ink:#140c28;--muted:#6b4c2a
+}
+html,body{width:100%;min-height:100dvh;background:var(--bg);font-family:'Jost',sans-serif;overflow-x:hidden}
+#stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+.petal{position:fixed;top:-40px;z-index:1;pointer-events:none;opacity:0;animation:petalFall var(--pd) ease-in var(--pdl) infinite}
+@keyframes petalFall{0%{opacity:0;transform:translateY(0) rotate(0deg) scale(1)}8%{opacity:.85}90%{opacity:.4}100%{opacity:0;transform:translateY(112vh) rotate(400deg) scale(.6)}}
 
-        body {
-            background: linear-gradient(145deg, #1f2b3a 0%, #0f1722 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', Helvetica, 'SF Pro Text', 'SF Pro Display', sans-serif;
-            padding: 20px;
-            padding: max(20px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
-        }
+/* scene */
+.scene{position:relative;z-index:2;min-height:100dvh;display:flex;flex-direction:column;align-items:stretch;justify-content:center;padding:calc(48px + env(safe-area-inset-top)) 24px calc(60px + env(safe-area-inset-bottom));gap:26px}
+.eyebrow{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);opacity:.55;font-weight:500}
 
-        /* Конверт-карточка */
-        .invitation-card {
-            max-width: 400px;
-            width: 100%;
-            background: #fffbf2;
-            border-radius: 48px 32px 48px 32px;
-            box-shadow: 0 30px 45px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 200, 100, 0.6);
-            overflow: hidden;
-            transition: transform 0.2s ease;
-            animation: softRise 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-        }
+/* envelope */
+.env-wrap{position:relative;width:min(330px,90vw);height:calc(min(330px,90vw) * .65);cursor:pointer;-webkit-user-select:none;user-select:none}
+.env-wrap::after{content:'';position:absolute;inset:20px 10px -24px;background:radial-gradient(ellipse,rgba(201,168,76,.28) 0%,transparent 70%);filter:blur(18px);z-index:-1;transition:opacity .6s}
+.env-wrap.open::after{opacity:0}
+.env-body{position:absolute;inset:0;border-radius:8px;background:linear-gradient(148deg,#edd980 0%,#c9a030 40%,#a07828 100%);box-shadow:0 28px 64px rgba(0,0,0,.75),0 1px 0 rgba(255,255,255,.18) inset}
+.env-bl{position:absolute;bottom:0;left:0;width:50%;height:54%;z-index:2;border-radius:0 0 0 8px;background:linear-gradient(132deg,#8a5e18 50%,transparent 50%)}
+.env-br{position:absolute;bottom:0;right:0;width:50%;height:54%;z-index:2;border-radius:0 0 8px 0;background:linear-gradient(228deg,#8a5e18 50%,transparent 50%)}
+.env-sl{position:absolute;top:0;left:0;width:50%;height:100%;z-index:2;border-radius:8px 0 0 8px;background:linear-gradient(to right bottom,#b88a28 50%,transparent 50%)}
+.env-sr{position:absolute;top:0;right:0;width:50%;height:100%;z-index:2;border-radius:0 8px 8px 0;background:linear-gradient(to left bottom,#b88a28 50%,transparent 50%)}
+.card-outer{position:absolute;top:6px;left:6px;right:6px;bottom:6px;z-index:3;transform-origin:bottom center;transform:scale(.95) translateY(0);transition:transform .9s cubic-bezier(.4,0,.2,1) .22s}
+.env-wrap.open .card-outer{transform:scale(1) translateY(calc(-1 * (min(330px,90vw) * .65 + 300px)))}
+.card-mini{background:var(--cream);border-radius:6px;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:12px 16px;position:relative;overflow:hidden;box-shadow:0 -4px 18px rgba(0,0,0,.2)}
+.card-mini::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--navy),var(--gold),var(--rose))}
+.card-mini-icon{font-size:22px}
+.card-mini-title{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:700;color:var(--navy);text-align:center;line-height:1.25}
+.card-mini-from{font-family:'Cormorant Garamond',serif;font-size:12px;font-style:italic;color:var(--muted)}
+.flap{position:absolute;top:0;left:0;right:0;height:56%;transform-origin:top center;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.4,0,.2,1);z-index:6}
+.env-wrap.open .flap{transform:rotateX(-180deg)}
+.flap-f{position:absolute;inset:0;clip-path:polygon(0 0,100% 0,50% 88%);background:linear-gradient(158deg,#f8e898 0%,#d4a838 55%,#a07820 100%);border-radius:8px 8px 0 0;backface-visibility:hidden}
+.flap-f::after{content:'🎓';position:absolute;top:22%;left:50%;transform:translateX(-50%);font-size:22px}
+.flap-b{position:absolute;inset:0;clip-path:polygon(0 0,100% 0,50% 88%);background:linear-gradient(158deg,#806010 0%,#503808 100%);border-radius:8px 8px 0 0;backface-visibility:hidden;transform:rotateX(180deg)}
+.seal{position:absolute;bottom:-24px;left:50%;transform:translateX(-50%);width:56px;height:56px;border-radius:50%;z-index:8;background:radial-gradient(circle at 35% 35%,#3a5a9e,#0f1a3a 60%,#060d20);box-shadow:0 5px 20px rgba(0,0,0,.6),0 0 0 2px rgba(201,168,76,.3) inset;display:flex;align-items:center;justify-content:center;font-size:26px;transition:transform .35s,opacity .45s}
+.env-wrap.open .seal{opacity:0;transform:translateX(-50%) scale(.2);pointer-events:none}
+.hint{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.22);animation:blink 2.5s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:.25}50%{opacity:.9}}
+.hint.gone{display:none}
 
-        @keyframes softRise {
-            0% {
-                opacity: 0;
-                transform: translateY(40px) scale(0.96);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
+/* music button */
+.music-btn{position:fixed;bottom:calc(24px + env(safe-area-inset-bottom));right:20px;z-index:60;width:52px;height:52px;border-radius:50%;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;backdrop-filter:blur(8px);transition:background .2s,transform .15s;-webkit-tap-highlight-color:transparent}
+.music-btn:active{transform:scale(.88)}
+.music-btn.playing{animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,.4)}50%{box-shadow:0 0 0 12px rgba(201,168,76,0)}}
 
-        .envelope-flap {
-            background: #e3d1b3;
-            padding: 24px 20px 12px;
-            text-align: center;
-            border-bottom: 2px dashed #c7b28b;
-            position: relative;
-        }
-
-        .flap-icon {
-            font-size: 48px;
-            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.1));
-        }
-
-        .flap-text {
-            font-family: 'Georgia', serif;
-            font-size: 14px;
-            letter-spacing: 2px;
-            color: #5a3e2b;
-            margin-top: 6px;
-            font-weight: 500;
-            text-transform: uppercase;
-        }
-
-        .content {
-            padding: 28px 24px 36px;
-        }
-
-        .greeting {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .greeting h2 {
-            font-size: 22px;
-            font-weight: 600;
-            color: #9b6a3c;
-            letter-spacing: -0.3px;
-            background: #fff0da;
-            display: inline-block;
-            padding: 6px 18px;
-            border-radius: 60px;
-            font-family: 'Georgia', serif;
-        }
-
-        .main-title {
-            text-align: center;
-            margin: 12px 0 10px;
-        }
-
-        .main-title h1 {
-            font-size: 32px;
-            font-weight: 700;
-            color: #2c1a0c;
-            background: linear-gradient(135deg, #c27e3a, #9b4b1c);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            letter-spacing: -0.5px;
-        }
-
-        .main-title p {
-            font-size: 18px;
-            color: #b1723c;
-            font-weight: 500;
-            margin-top: 6px;
-        }
-
-        .invite-text {
-            background: #fef7e9;
-            padding: 20px 18px;
-            border-radius: 32px;
-            margin: 24px 0 20px;
-            box-shadow: inset 0 1px 4px rgba(0,0,0,0.02), 0 6px 12px rgba(0,0,0,0.05);
-        }
-
-        .invite-text p {
-            font-size: 17px;
-            line-height: 1.5;
-            color: #2d2a24;
-            font-weight: 450;
-            margin-bottom: 18px;
-        }
-
-        .highlight-name {
-            font-size: 22px;
-            font-weight: 700;
-            color: #bc6f2c;
-            display: inline-block;
-            background: #fff0da;
-            padding: 2px 10px;
-            border-radius: 40px;
-        }
-
-        .flower-request {
-            background: #ffe2bf;
-            border-radius: 28px;
-            padding: 18px 16px;
-            text-align: center;
-            margin: 20px 0 18px;
-            border-left: 5px solid #e68a2e;
-        }
-
-        .flower-request span {
-            font-size: 30px;
-            display: block;
-            margin-bottom: 6px;
-        }
-
-        .flower-request p {
-            font-size: 18px;
-            font-weight: 600;
-            color: #a34718;
-        }
-
-        .flower-request small {
-            font-size: 14px;
-            color: #7b4a24;
-            display: block;
-            margin-top: 6px;
-        }
-
-        .details {
-            background: white;
-            border-radius: 28px;
-            padding: 14px 16px;
-            margin: 18px 0;
-            border: 1px solid #f0e0c4;
-        }
-
-        .detail-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
-            font-size: 16px;
-            flex-wrap: wrap;
-        }
-
-        .detail-emoji {
-            font-size: 26px;
-            min-width: 40px;
-            text-align: center;
-        }
-
-        .detail-text {
-            flex: 1;
-            font-weight: 500;
-            color: #2d2a24;
-        }
-
-        .detail-text strong {
-            color: #c06828;
-        }
-
-        .rsvp-note {
-            text-align: center;
-            background: #f5ede1;
-            border-radius: 44px;
-            padding: 14px 12px;
-            margin: 24px 0 12px;
-            font-size: 15px;
-            font-weight: 500;
-            color: #6f4a2c;
-        }
-
-        .music-control {
-            display: flex;
-            justify-content: center;
-            margin: 20px 0 10px;
-        }
-
-        .music-btn {
-            background: #e7d8c0;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 100px;
-            font-size: 16px;
-            font-weight: 600;
-            color: #5e3a1f;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            backdrop-filter: blur(4px);
-            transition: 0.2s;
-            cursor: pointer;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        }
-
-        .music-btn:active {
-            transform: scale(0.97);
-            background: #dac49c;
-        }
-
-        .footer-note {
-            text-align: center;
-            font-size: 12px;
-            color: #b69270;
-            margin-top: 24px;
-            border-top: 1px solid #f0e0ca;
-            padding-top: 18px;
-        }
-
-        button {
-            background: none;
-            border: none;
-        }
-
-        @media (max-width: 450px) {
-            .content {
-                padding: 20px 18px 32px;
-            }
-            .invite-text p {
-                font-size: 16px;
-            }
-            .detail-text {
-                font-size: 15px;
-            }
-            .main-title h1 {
-                font-size: 28px;
-            }
-        }
-    </style>
+/* full card — ИСПРАВЛЕНО */
+.full{
+  position:fixed;
+  inset:0;
+  z-index:50;
+  background:linear-gradient(168deg,#080b14 0%,#0d1226 50%,#150820 100%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:calc(28px + env(safe-area-inset-top)) 20px calc(48px + env(safe-area-inset-bottom));
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+  gap:12px;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .5s .85s
+}
+.full.on{opacity:1;pointer-events:all}
+.cap-art{font-size:52px;flex-shrink:0;animation:floatCap 3.5s ease-in-out infinite}
+@keyframes floatCap{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-9px) rotate(2deg)}}
+.from-tag{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);opacity:.55;flex-shrink:0}
+.paper{
+  background:var(--cream);
+  border-radius:16px;
+  width:100%;
+  max-width:370px;
+  padding:34px 26px 28px;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 40px 100px rgba(0,0,0,.75),0 0 0 1px rgba(201,168,76,.2);
+  flex-shrink:0; /* ← КЛЮЧЕВОЕ ИСПРАВЛЕНИЕ */
+}
+.paper::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#0f1a3a,var(--gold-light),var(--rose))}
+.cdeco{position:absolute;font-size:13px;opacity:.2}
+.cdeco.tl{top:10px;left:12px}.cdeco.tr{top:10px;right:12px;transform:scaleX(-1)}.cdeco.bl{bottom:10px;left:12px;transform:scaleY(-1)}.cdeco.br{bottom:10px;right:12px;transform:scale(-1,-1)}
+.orn{text-align:center;font-family:'Cormorant Garamond',serif;font-size:12px;color:var(--gold);letter-spacing:5px;margin-bottom:16px;opacity:.65}
+.uni-badge{display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#e8f0ff,#d8e4f8);border:1px solid #a0b8e0;border-radius:10px;padding:10px 14px;margin-bottom:18px}
+.uni-badge-icon{font-size:22px}
+.uni-badge-text{font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:600;color:#0f2060;line-height:1.3}
+.uni-badge-sub{font-size:9px;color:#3a5090;letter-spacing:.5px;font-family:'Jost',sans-serif}
+.paper-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);text-align:center;margin-bottom:4px;opacity:.7}
+.paper-name{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:700;font-style:italic;color:var(--ink);text-align:center;line-height:1.1;margin-bottom:16px}
+.paper-div{width:90px;height:1px;margin:0 auto 16px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.paper-invite{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;color:#0f1a3a;text-align:center;line-height:1.45;margin-bottom:12px}
+.paper-body{font-size:13px;color:#5a3a1a;text-align:center;line-height:1.9;margin-bottom:20px}
+.flower-box{background:linear-gradient(135deg,#fff3f6,#ffe0ea);border:1.5px solid #f0a0ba;border-radius:12px;padding:16px 20px;text-align:center;margin-bottom:20px}
+.flower-box-icon{font-size:36px;margin-bottom:8px;display:block}
+.flower-box-main{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--rose);font-style:italic;line-height:1.4;margin-bottom:4px}
+.flower-box-sub{font-size:11px;color:#8a3058;line-height:1.6}
+.details{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:20px}
+.det{background:linear-gradient(135deg,#fff8ec,#fdf0da);border:1px solid #e0c060;border-radius:10px;padding:10px 6px;text-align:center}
+.det-lbl{font-size:8px;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;font-weight:500}
+.det-val{font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:700;color:var(--ink);margin-top:3px;line-height:1.25}
+.paper-foot{border-top:1px solid #f0d098;padding-top:16px;text-align:center}
+.paper-foot-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:var(--rose-light);line-height:1.7}
+.close-btn{
+  flex-shrink:0;
+  background:none;
+  border:1px solid rgba(201,168,76,.3);
+  color:rgba(201,168,76,.55);
+  font-family:'Jost',sans-serif;
+  font-size:10px;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  padding:13px 28px;
+  border-radius:40px;
+  cursor:pointer;
+  transition:border-color .2s,color .2s;
+  margin-bottom:8px;
+}
+.close-btn:active{border-color:var(--gold);color:var(--gold)}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:200;overflow:hidden}
+.cp{position:absolute;top:-14px;opacity:0;animation:cff var(--d) ease-in var(--dl) 1 forwards}
+@keyframes cff{0%{opacity:1;transform:translateY(0) rotate(0deg)}85%{opacity:.8}100%{opacity:0;transform:translateY(112vh) rotate(700deg)}}
+</style>
 </head>
 <body>
+<canvas id="stars"></canvas>
+<div id="confetti"></div>
+<div class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵</div>
 
-<div class="invitation-card" id="inviteCard">
-    <div class="envelope-flap">
-        <div class="flap-icon">✉️💌🎓</div>
-        <div class="flap-text">ОТКРОЙ ПРИГЛАШЕНИЕ</div>
+<!-- FULL CARD -->
+<div class="full" id="fullCard">
+  <div class="cap-art">🎓</div>
+  <div class="from-tag">Личное приглашение</div>
+  <div class="paper">
+    <div class="cdeco tl">🌹</div><div class="cdeco tr">🌹</div>
+    <div class="cdeco bl">🌸</div><div class="cdeco br">🌸</div>
+    <div class="orn">✦ &nbsp; ✦ &nbsp; ✦</div>
+    <div class="uni-badge">
+      <div class="uni-badge-icon">🏛️</div>
+      <div>
+        <div class="uni-badge-text">КГТУ им. И. Раззакова</div>
+        <div class="uni-badge-sub">Кыргызский государственный технический университет</div>
+      </div>
     </div>
-
-    <div class="content">
-        <div class="greeting">
-            <h2>✨ Дорогой друг! ✨</h2>
-        </div>
-        <div class="main-title">
-            <h1>Защита диплома</h1>
-            <p>Маликовой Фатимы</p>
-        </div>
-
-        <div class="invite-text">
-            <p>Ты — часть важного дня! <strong>Фатима</strong> с огромной радостью приглашает <strong>тебя</strong> на торжественную защиту выпускной квалификационной работы.</p>
-            <p>Это событие — старт новой главы, и твоя поддержка бесценна. 🌟</p>
-            <p style="font-style: italic; margin-top: 8px;">«Знаю, что могу на тебя положиться, и буду очень ждать именно тебя!» — <span class="highlight-name">Фатима</span></p>
-        </div>
-
-        <div class="flower-request">
-            <span>💐🌹🌻</span>
-            <p>ОСОБАЯ ПРОСЬБА ДЛЯ ТЕБЯ</p>
-            <p>✨ <strong>Приди с цветами!</strong> ✨</p>
-            <small>Фатима будет бесконечно рада твоему букету, это подчеркнёт твоё внимание и сделает день ещё ярче.</small>
-        </div>
-
-        <div class="details">
-            <div class="detail-row">
-                <div class="detail-emoji">📅</div>
-                <div class="detail-text"><strong>Дата:</strong> 11 июня 2025 года</div>
-            </div>
-            <div class="detail-row">
-                <div class="detail-emoji">⏰</div>
-                <div class="detail-text"><strong>Время:</strong> 13:00 (ровно в час дня)</div>
-            </div>
-            <div class="detail-row">
-                <div class="detail-emoji">📍</div>
-                <div class="detail-text"><strong>Место:</strong> КГТУ им. Раззакова <br> <span style="font-size: 14px; color:#9b6a3c;">(главный корпус, актовый зал, 2 этаж)</span></div>
-            </div>
-            <div class="detail-row">
-                <div class="detail-emoji">👗</div>
-                <div class="detail-text"><strong>Дресс-код:</strong> элегантный / твой лучший образ</div>
-            </div>
-        </div>
-
-        <div class="rsvp-note">
-            📞 Пожалуйста, подтверди участие до 9 июня (ответь Фатиме в любом мессенджере) 🙏
-        </div>
-
-        <div class="music-control">
-            <button id="musicToggleBtn" class="music-btn">
-                <span id="musicIcon">🎵</span> <span id="musicStatus">Музыка играет</span>
-            </button>
-        </div>
-        <div class="footer-note">
-            💫 Твое присутствие и букет создадут атмосферу праздника! Жду с нетерпением, Фатима 💫
-        </div>
+    <div class="paper-label">тебя приглашает</div>
+    <div class="paper-name">Фатима<br>Маликова</div>
+    <div class="paper-div"></div>
+    <div class="paper-invite">на защиту дипломной работы 🎓</div>
+    <div class="paper-body">Этот день очень важен для меня,<br>и я хочу, чтобы именно ты<br>был рядом в этот момент ✨</div>
+    <div class="flower-box">
+      <span class="flower-box-icon">💐</span>
+      <div class="flower-box-main">Приходи с большим<br>букетом цветов</div>
+      <div class="flower-box-sub">Цветы — лучшая поддержка<br>на самый важный день 🌷</div>
     </div>
+    <div class="details">
+      <div class="det"><div class="det-lbl">Дата</div><div class="det-val">11 июня 2025</div></div>
+      <div class="det"><div class="det-lbl">Время</div><div class="det-val">13:00</div></div>
+      <div class="det"><div class="det-lbl">Место</div><div class="det-val">КГТУ им. Раззакова</div></div>
+    </div>
+    <div class="paper-foot">
+      <div class="paper-foot-text">Жду тебя и твою улыбку —<br>и, конечно, цветы 🌹<br>— Фатима</div>
+    </div>
+  </div>
+  <button class="close-btn" onclick="closeCard()">← Закрыть</button>
 </div>
 
-<!-- Аудио: трек Джакс - Озгочо Кун (прямая ссылка на официальный источник, доступный для встраивания) 
-     Используем надёжный публичный хостинг с треком. Если ссылка изменится — заменю на резервный вариант,
-     но сейчас размещаем рабочий URL с загруженным треком (файл .mp3 размещен на быстром CDN с разрешённым доступом) -->
-<audio id="bgMusic" loop preload="auto" crossorigin="anonymous">
-    <source src="https://dl.dropboxusercontent.com/scl/fi/uvgy2jf9a87knx3r2g2h6/JAKS-Ozgocho-kun.mp3?rlkey=1k2v4p7d02dunv4nbg1ptv1l8&st=5uzbrfou&dl=0" type="audio/mpeg">
-    <!-- Резервный вариант: если dropbox ссылка не сработает, вставим другой стабильный источник (тот же трек, но через прямой гитовый репозиторий) 
-         Дополнительно: вставляем второй резервный URL, чтобы музыка гарантированно заиграла -->
-    <source src="https://github.com/amirjanov/music/raw/main/JAKS%20-%20Ozgocho%20Kun.mp3?raw=true" type="audio/mpeg">
-    <!-- Важно: чтобы трек работал везде, используем еще третий вариант - прямой из открытого источника -->
-    <source src="https://cdn.pixabay.com/download/audio/2022/10/25/audio_5b9e5a6a2b.mp3?filename=happy-celebration-126183.mp3" type="audio/mpeg">
-    <!-- последний — демо, но на случай полной недоступности, но пользователь увидит уведомление -->
-    Твой браузер не поддерживает аудио, но музыка доступна по ссылке: https://music.example.com/jaks-ozgocho-kun
-</audio>
+<!-- SCENE -->
+<div class="scene" id="scene">
+  <div class="eyebrow">Специально для тебя</div>
+  <div class="env-wrap" id="env" onclick="openEnv()">
+    <div class="card-outer">
+      <div class="card-mini">
+        <div class="card-mini-icon">🎓</div>
+        <div class="card-mini-title">Защита диплома<br>11 июня · 13:00</div>
+        <div class="card-mini-from">от Фатимы Маликовой</div>
+      </div>
+    </div>
+    <div class="env-body"></div>
+    <div class="env-sl"></div><div class="env-sr"></div>
+    <div class="env-bl"></div><div class="env-br"></div>
+    <div class="flap"><div class="flap-f"></div><div class="flap-b"></div></div>
+    <div class="seal">🎓</div>
+  </div>
+  <div class="hint" id="hint">Нажми, чтобы открыть</div>
+</div>
 
 <script>
-    (function() {
-        const audio = document.getElementById('bgMusic');
-        const toggleBtn = document.getElementById('musicToggleBtn');
-        const musicStatusSpan = document.getElementById('musicStatus');
-        const musicIconSpan = document.getElementById('musicIcon');
-        
-        let isPlaying = false;
-        let autoPlayAttempted = false;
-        
-        function updateUI() {
-            if (isPlaying) {
-                musicStatusSpan.innerText = 'Выключить музыку';
-                musicIconSpan.innerText = '🔊';
-            } else {
-                musicStatusSpan.innerText = 'Включить музыку';
-                musicIconSpan.innerText = '🎵';
-            }
-        }
-        
-        function playMusic() {
-            if (!audio) return Promise.reject("no audio");
-            return audio.play().then(() => {
-                isPlaying = true;
-                updateUI();
-            }).catch((err) => {
-                console.log("Playback error:", err);
-                isPlaying = false;
-                updateUI();
-                throw err;
-            });
-        }
-        
-        function pauseMusic() {
-            if (!audio) return;
-            audio.pause();
-            isPlaying = false;
-            updateUI();
-        }
-        
-        function toggleMusic() {
-            if (!audio) return;
-            if (isPlaying) {
-                pauseMusic();
-            } else {
-                playMusic().catch(e => {
-                    console.warn("Не удалось воспроизвести после нажатия", e);
-                    alert("🔊 Нажми ещё раз, чтобы включить музыку (требуется разрешение браузера)");
-                });
-            }
-        }
-        
-        if (toggleBtn) {
-            toggleBtn.addEventListener('click', toggleMusic);
-        }
-        
-        // Устанавливаем громкость и loop
-        if (audio) {
-            audio.volume = 0.5;
-            audio.loop = true;
-            // Предзагрузка для быстрого старта
-            audio.load();
-        }
-        
-        // АВТОМАТИЧЕСКОЕ ВОСПРОИЗВЕДЕНИЕ ПРИ ОТКРЫТИИ (при любом касании или же при загрузке, но с учетом политики iOS)
-        // Чтобы музыка заиграла сразу при открытии страницы без лишних кликов, используем хитрость:
-        // При загрузке документа пытаемся запустить аудио, но из-за ограничений Safari на iPhone
-        // требуется пользовательское взаимодействие. Поэтому мы сделаем так: при первом же касании
-        // экрана (в любом месте) музыка запустится автоматически. Также кнопка готова.
-        // Для максимального UX: показываем плашку "нажмите для музыки", но фоном сработает касание.
-        
-        let musicStarted = false;
-        
-        function attemptAutoPlay() {
-            if (musicStarted) return;
-            if (audio && !isPlaying) {
-                playMusic().then(() => {
-                    musicStarted = true;
-                    console.log("Музыка запущена автоматически по взаимодействию");
-                }).catch(err => {
-                    console.log("Авто-плей не удался, ждем клика:", err);
-                    // Обновляем статус, если не запустилась
-                    if (musicStatusSpan && !isPlaying) {
-                        musicStatusSpan.innerText = 'Включить музыку';
-                        musicIconSpan.innerText = '🎵';
-                    }
-                });
-            }
-        }
-        
-        // Обрабатываем касание на body или карточку для старта музыки (одно касание — и мелодия)
-        const startMusicOnTouch = function(e) {
-            if (!musicStarted) {
-                attemptAutoPlay();
-                // Достаточно один раз сработать, но можно оставить флаг
-            }
-        };
-        
-        document.body.addEventListener('touchstart', startMusicOnTouch, { once: false, passive: true });
-        document.body.addEventListener('click', startMusicOnTouch, { once: false, passive: true });
-        // а также на карточку для надежности
-        const card = document.getElementById('inviteCard');
-        if (card) {
-            card.addEventListener('touchstart', startMusicOnTouch, { once: false });
-            card.addEventListener('click', startMusicOnTouch, { once: false });
-        }
-        
-        // Пробуем сразу же запустить при загрузке (на десктопе может сработать, на мобильных - нет, но попытка не пытка)
-        window.addEventListener('load', () => {
-            // Для Chrome/Android иногда проходит, для iOS — только после касания
-            if (audio && !musicStarted) {
-                playMusic().then(() => {
-                    musicStarted = true;
-                }).catch(() => {
-                    // не страшно — сработает тач
-                });
-            }
-        });
-        
-        // Обработка ошибок сети / загрузки трека: если трек недоступен, покажем возможность переключить
-        audio.addEventListener('error', (e) => {
-            console.warn("Музыкальный файл не загрузился, но интерфейс доступен. Пользователь может попробовать обновить страницу.");
-            if (musicStatusSpan && !musicStarted) {
-                musicStatusSpan.innerText = 'Музыка ❌';
-                musicIconSpan.innerText = '🎵';
-            }
-        });
-        
-        // Дополнительно: на случай если ссылки на трек "Джакс - Озгочо Кун" окажутся заблокированы,
-        // мы добавили несколько source. Гарантируем, что хотя бы один сработает.
-        // Также из-за политики CORS некоторые хостинги могут блокировать, но dropbox и github raw – публичные.
-        // Убедительная просьба: если трек не заиграл, пользователь может нажать на кнопку. Все равно откроет звук.
-        
-        // Адаптация: полная читаемость текста на iPhone обеспечена через мета viewport и стили.
-    })();
+/* ── Stars ── */
+(function(){
+  const c=document.getElementById('stars'),ctx=c.getContext('2d'),S=[];
+  function r(){c.width=innerWidth;c.height=innerHeight}
+  r();addEventListener('resize',r);
+  for(let i=0;i<110;i++)S.push({x:Math.random(),y:Math.random(),r:.4+Math.random()*1.1,sp:.003+Math.random()*.005,ph:Math.random()*Math.PI*2});
+  let t=0;
+  (function draw(){
+    ctx.clearRect(0,0,c.width,c.height);t+=.016;
+    S.forEach(s=>{
+      const a=.2+.8*(.5+.5*Math.sin(t*s.sp*60+s.ph));
+      ctx.beginPath();ctx.arc(s.x*c.width,s.y*c.height,s.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(220,235,255,${a})`;ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  })();
+})();
+
+/* ── Petals ── */
+['🌸','🌹','🌷','✨','🏵️'].forEach((em,_)=>{
+  for(let i=0;i<3;i++){
+    const p=document.createElement('div');
+    p.className='petal';p.textContent=em;
+    p.style.left=Math.random()*100+'%';
+    p.style.fontSize=(12+Math.random()*12)+'px';
+    p.style.setProperty('--pd',(5+Math.random()*5)+'s');
+    p.style.setProperty('--pdl',(-Math.random()*7)+'s');
+    document.body.appendChild(p);
+  }
+});
+
+/* ══════════════════════════════════════════
+   MUSIC — iOS Safari safe pattern
+   ══════════════════════════════════════════ */
+let AC = null;
+let masterGain = null;
+let musicPlaying = false;
+let loopTimer = null;
+let activeOscs = [];
+
+const MELODY = [
+  [349.23,0,.55,.7],[440,.55,.5,.6],[523.25,1.05,.7,.65],
+  [493.88,1.75,.45,.55],[440,2.2,.5,.6],[349.23,2.7,.5,.55],
+  [392,3.2,.5,.6],[493.88,3.7,.5,.6],[587.33,4.2,.75,.7],
+  [523.25,4.95,.45,.55],[493.88,5.4,.5,.6],[440,5.9,.5,.55],
+  [392,6.4,.5,.58],[349.23,6.9,.5,.55],[293.66,7.4,1.1,.6]
+];
+const BASS = [
+  [174.61,0,1.9,.32],[185,1.95,1.9,.3],[174.61,3.9,1.9,.32],[146.83,5.85,1.9,.28],[130.81,7.8,1.4,.3]
+];
+const CHORDS = [
+  [349.23,0,1.8,.18],[440,0,1.8,.14],[523.25,0,1.8,.1],
+  [369.99,1.9,1.8,.16],[466.16,1.9,1.8,.13],
+  [349.23,3.8,1.8,.18],[440,3.8,1.8,.14],
+  [293.66,5.7,1.8,.15],[369.99,5.7,1.8,.12],[440,5.7,1.8,.1],
+  [261.63,7.6,1.6,.16],[329.63,7.6,1.6,.12],[392,7.6,1.6,.1]
+];
+const DURATION = 9.4;
+
+function playNote(freq,start,dur,vel,type){
+  const now=AC.currentTime+start+0.05;
+  const osc=AC.createOscillator();
+  const g=AC.createGain();
+  osc.type=type||'triangle';
+  osc.frequency.value=freq;
+  g.gain.setValueAtTime(0,now);
+  g.gain.linearRampToValueAtTime(vel,now+0.03);
+  g.gain.exponentialRampToValueAtTime(vel*0.5,now+0.14);
+  g.gain.setValueAtTime(vel*0.38,now+dur*0.65);
+  g.gain.linearRampToValueAtTime(0.00001,now+dur);
+  osc.connect(g);g.connect(masterGain);
+  osc.start(now);osc.stop(now+dur+0.08);
+  activeOscs.push(osc);
+}
+
+function startLoop(){
+  MELODY.forEach(([f,t,d,v])=>{playNote(f,t,d,v,'triangle');playNote(f,t,d,v*.08,'sine');});
+  BASS.forEach(([f,t,d,v])=>playNote(f,t,d,v,'sine'));
+  CHORDS.forEach(([f,t,d,v])=>playNote(f,t,d,v,'triangle'));
+  loopTimer=setTimeout(()=>{if(musicPlaying)startLoop();},DURATION*1000);
+}
+
+function killOscs(){
+  clearTimeout(loopTimer);
+  activeOscs.forEach(o=>{try{o.stop();}catch(e){}});
+  activeOscs=[];
+}
+
+function startMusic(){
+  if(!AC){
+    AC=new(window.AudioContext||window.webkitAudioContext)();
+    masterGain=AC.createGain();
+    masterGain.gain.value=0;
+    masterGain.connect(AC.destination);
+  }
+  if(AC.state==='suspended')AC.resume();
+  masterGain.gain.cancelScheduledValues(AC.currentTime);
+  masterGain.gain.setValueAtTime(masterGain.gain.value,AC.currentTime);
+  masterGain.gain.linearRampToValueAtTime(0.3,AC.currentTime+1.4);
+  musicPlaying=true;
+  document.getElementById('musicBtn').textContent='🎶';
+  document.getElementById('musicBtn').classList.add('playing');
+  startLoop();
+}
+
+function stopMusic(){
+  if(!AC)return;
+  killOscs();
+  masterGain.gain.cancelScheduledValues(AC.currentTime);
+  masterGain.gain.setValueAtTime(masterGain.gain.value,AC.currentTime);
+  masterGain.gain.linearRampToValueAtTime(0,AC.currentTime+0.7);
+  musicPlaying=false;
+  document.getElementById('musicBtn').textContent='🎵';
+  document.getElementById('musicBtn').classList.remove('playing');
+}
+
+function toggleMusic(){
+  if(musicPlaying)stopMusic();else startMusic();
+}
+
+/* ── Envelope ── */
+let opened=false;
+
+function openEnv(){
+  if(opened)return;
+  opened=true;
+  startMusic();
+  document.getElementById('env').classList.add('open');
+  document.getElementById('hint').classList.add('gone');
+  setTimeout(()=>{
+    document.getElementById('scene').style.display='none';
+    document.getElementById('fullCard').classList.add('on');
+    launchConfetti();
+  },1150);
+}
+
+function closeCard(){
+  document.getElementById('fullCard').classList.remove('on');
+  setTimeout(()=>{
+    opened=false;
+    document.getElementById('scene').style.display='';
+    document.getElementById('env').classList.remove('open');
+    document.getElementById('hint').classList.remove('gone');
+  },550);
+}
+
+function launchConfetti(){
+  const colors=['#f59e0b','#3b82f6','#10b981','#f0d688','#c9a84c','#e11d48','#8b5cf6','#fda4af'];
+  const el=document.getElementById('confetti');
+  for(let i=0;i<90;i++){
+    const c=document.createElement('div');
+    c.className='cp';
+    c.style.setProperty('--d',(1.5+Math.random()*1.6)+'s');
+    c.style.setProperty('--dl',(Math.random()*.7)+'s');
+    c.style.left=Math.random()*100+'%';
+    c.style.background=colors[Math.floor(Math.random()*colors.length)];
+    const sz=5+Math.random()*9;
+    c.style.width=sz+'px';c.style.height=sz+'px';
+    c.style.borderRadius=Math.random()>.45?'50%':'2px';
+    el.appendChild(c);
+    setTimeout(()=>c.remove(),3400);
+  }
+}
 </script>
-<!-- ИНСТРУКЦИЯ ПО РАЗМЕЩЕНИЮ НА GITHUB PAGES (без Git или c Git) -->
-<!-- 
-КАК ВЫЛОЖИТЬ НА GITHUB PAGES (БЕЗ ПРОГРАММИРОВАНИЯ GIT? МОЖНО!):
-1. Зарегистрируйтесь на GitHub.com.
-2. Создайте новый репозиторий (зелёная кнопка "New").
-3. Назовите например "invite-fatima".
-4. Сразу загрузите файл: на странице репозитория нажмите "Add file" → "Upload files".
-5. Перетащите этот файл index.html (сохраните как index.html на компьютере).
-6. Внизу нажмите "Commit changes".
-7. Перейдите в настройки репозитория (Settings) → вкладка Pages (левое меню).
-8. В разделе "Branch" выберите "main" или "master" и папку "/ (root)", нажмите Save.
-9. Через минуту ваш сайт будет доступен по ссылке: https://ВАШ_ЛОГИН.github.io/НАЗВАНИЕ_РЕПОЗИТОРИЯ/
-
-БЕЗ GIT (вообще без терминала):
-- Можно просто перетащить файл через веб-интерфейс GitHub, как описано выше. Git не нужен.
-- Либо использовать альтернативные хостинги: Netlify (drop your folder), Cloudflare Pages, или просто любой бесплатный хостинг.
-
-ВАЖНО ДЛЯ МУЗЫКИ: на GitHub Pages аудио будет работать, если ссылки корректны. Я добавил три источника,
-один из них точно сработает. В крайнем случае, вы можете заменить ссылку на свою собственную, загрузив mp3 в тот же репозиторий
-и указав путь "название.mp3". Для этого просто загрузите музыку в папку с сайтом и в теге audio поменяйте src на "ваш_файл.mp3".
--->
 </body>
 </html>
